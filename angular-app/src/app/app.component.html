@@ -1,13 +1,8 @@
 <!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">
-  <div class="navbar-nav">
-      <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-      <button class="nav-item nav-link" (click)="logout()">Logout</button>
-  </div>
-</nav>
+<app-top-bar *ngIf="user && user.hasOwnProperty('id')"></app-top-bar>
 
 <!-- main app container -->
-<div class="app-container">
+<div>
   <router-outlet></router-outlet>
 </div>
 

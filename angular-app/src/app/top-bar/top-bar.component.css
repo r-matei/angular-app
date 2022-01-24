@@ -1,0 +1,35 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 50px;
+  background-color: hsl(220, 100%, 50%);
+  align-items: center;
+}
+
+.navbar a:link {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar a:visited {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar a:active {
+  color: white;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .submit-btn {
+    width: 100px;
+    margin-bottom: 0px;
+  }
+}

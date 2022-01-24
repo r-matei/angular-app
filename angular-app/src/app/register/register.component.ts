@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import { Component, Input} from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { AccountService } from '../_services';
 
@@ -19,18 +17,18 @@ export class RegisterComponent {
   });
   loading = false;
   submitted = false;
+  @Input() password: string;
+  @Input() min = 8;
+  @Input() max = 30;
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
     private accountService: AccountService,
   ) { }
 
   onSubmit() {
     this.submitted = true;
 
-    // stop here if form is invalid
     if (this.registerForm.invalid) {
         return;
     }

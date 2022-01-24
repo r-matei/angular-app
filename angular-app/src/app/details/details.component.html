@@ -1,1 +1,44 @@
-<p>details works!</p>
+<div *ngIf="item" class="details-container">
+
+  <div class="details-header">
+    <img class="image-container" src="/assets/default-placeholder.png" alt="image">
+    <div class="details-text">
+      <div class="text-large">
+        <label>Title: </label>
+        <span>{{ item.title }}</span>
+      </div>
+
+      <div class="text-large">
+        <label>Artist: </label>
+        <span>{{ item.artist_display }}</span>
+      </div>
+
+      <div class="badge-container">
+        <div class="badge" *ngFor="let title of item.classification_titles">
+          {{ title }}
+        </div>
+      </div>
+
+      <div class="dates">
+        <div>
+          <label>Date start: </label>
+          <span>{{ item.date_start }}</span>
+        </div>
+
+        <div>
+          <label>Date end: </label>
+          <span>{{ item.date_end }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="details-body">
+    <label>Dimensions: </label>
+    <p>{{ item.dimensions }}</p>
+
+    <label>Exhibition history: </label>
+    <p>{{ item.exhibition_history }}</p>
+  </div>
+
+</div>

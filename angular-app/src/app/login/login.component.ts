@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { AccountService } from '../_services';
 
@@ -18,6 +17,8 @@ export class LoginComponent {
   });
   loading = false;
   submitted = false;
+  hide: boolean = true;
+  error: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,15 +35,24 @@ export class LoginComponent {
     }
 
     this.loading = true;
-    console.log('test1');
     let loggedUser = this.accountService.login(this.loginForm.controls['email'].value, this.loginForm.controls['password'].value);
 
     if(!loggedUser) {
       this.loading = false;
+      this.error = 'Please check Your credentials!'
+
     } else {
       const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
       this.router.navigateByUrl(returnUrl);
     }
+  }
+
+  showPassword() {
+    this.hide = false;
+  }
+
+  hidePassword() {
+    this.hide = true;
   }
 
 }

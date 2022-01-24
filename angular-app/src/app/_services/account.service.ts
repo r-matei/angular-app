@@ -1,28 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import usersData from './users.json';
+import usersData from '../../assets/credentials.json';
 import { User } from '../_models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  private userSubject: BehaviorSubject<User>;
-  public user: Observable<User>;
+  private userSubject: BehaviorSubject<User | null>;
+  public user: Observable<User | null>;
   private users: User[] = [];
 
   constructor(
     private router: Router,
   ) {
-    this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user') || '{}'));
+    this.userSubject = new BehaviorSubject<User | null>(JSON.parse(localStorage.getItem('user') || '{}'));
     this.user = this.userSubject.asObservable();
     this.users = usersData;
 
   }
 
-  public get userValue(): User {
+  public get userValue(): User | null {
     return this.userSubject.value;
   }
 
@@ -32,6 +31,7 @@ export class AccountService {
 
   register(user: User) {
     this.users.push(user);
+    this.router.navigate(['/account/login']);
   }
 
   login(email: string, password: string) {

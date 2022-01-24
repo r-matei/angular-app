@@ -1,1 +1,32 @@
-<p>dashboard works!</p>
+<div class="header">
+  <h1>Art gallery</h1>
+  <div class="dropdown">
+    <label class="dropbtn">Filter by artist: </label>
+    <select (change)="filterData($event.target)">
+      <option selected disabled value="">Choose an artist</option>
+      <option *ngFor="let artist of artists" [value]="artist">{{ artist }}</option>
+    </select>
+  </div>
+</div>
+
+<div class="cards-container">
+  <div *ngFor="let item of items | paginate: { id: 'pagination',
+  itemsPerPage: pageSize,
+  currentPage: page,
+  totalItems: total}" class="data-card">
+    <img class="image-container" src="/assets/default-placeholder.png" alt="image">
+    <div class="text-container">
+      <div class="data-title">{{item.title}}</div>
+      <p class="data-artist">{{item.artist_display}}</p>
+    </div>
+    <button class="submit-btn" [routerLink]="['/details', item.id]">View more</button>
+  </div>
+</div>
+<pagination-controls
+  id="pagination"
+  class="align-center"
+  previousLabel="Prev"
+  nextLabel="Next"
+  [responsive]="responsive"
+  (pageChange)="handlePageChange($event)"
+></pagination-controls>
